@@ -6,5 +6,6 @@
 
 # Ignore output
 
-examples/tango_output
 examples/tango_output/*
+docs/tango_output/*
+
