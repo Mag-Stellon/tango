@@ -2,46 +2,40 @@ Tango user's guide
 ======
 
 
-------
-
-
-Synopsis
-------
+= Synopsis =
 
 python3 [tango.py path] [documentName] [--html | --tex | --xml]
 
 
-Description
-------
+= Description =
 
 Tango is a programmable document processor which provides Latex/HTML output.
 Tango use documents written in a mix of latex and markdown-inspired short cuts.
 
 
-Using Pandoc
-------
+= Using Pandoc =
 
 Before using Tango, you have to be into your document direction.
 After, open a terminal and launch the **Synopsis** command-line.
 
-Options
-------
+= Options =
 
-#### --html
-Produce a HTML output
-
-####
-Produce a Latex output
-
-#### --xml
-Produce a xml output which is useful for debugging or pretty-print.
+\include{options.tango.tex}
 
 
+= Tango syntax =
 
-
-Tango syntax
-------
 
 If you get to know Markdown and Latex, it's quite easy since tango is inspired by them.
 
 \include{basics.tango.tex}
+
+= Define structures =
+
+
+\include{define.tango.tex}
+
+
+= Latex python instructions =
+
+\include{pythonInstructions.tango.tex}

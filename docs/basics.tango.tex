@@ -1,69 +1,162 @@
 \section{Basics}
+
 \subsection{Basic preamble}
-
+Add some informations to your document.
 \begin{code}[langague=tango]
-  
-  \title{A title}
-  \author{an author}
-  \date{a date}
-
+  \title{Tango user's guide}
+  \author{Nadarajah Mag-Stellon}
+  \date{01 Avril 2014}
 \end{code}
 
+\subsection{Document}
+As in Latex, you can use any class system for you document's command.
+The basics document like article, report, book ... are available.
+\begin{code}[langague=tango]
+  \document{article}   
+\end{code}
+
+\subsection{Environment}
+There are two kind of environment : anonymous and named environment
+Anonymous environment is use with the keyword *abstract* and let you write a nameless environment.
+\begin{code}[langague=tango]
+  \begin{EnvironementA}
+  \end{EnvironmentA}
+
+  \begin{abstract}
+  \end{abstract}
+\end{code}
 
 \subsection{Sections}
-
 Tango provides commands which let you structure your document.
-
 \begin{code}[langague=tango]
-\section{section A}
-\subsection{subsection A}
-\part{part A}
-\chapter{chapter A}
-\subsubsection{subsection A}
-\paragraph{paragraph A}
-\subparagraph{paragraph A}
+  \section{section A} or = section A =
+  \subsection{subsection A} or == subSection A ==
+  \part{part A}
+  \chapter{chapter A}
+  \subsubsection{subsection A}
+  \paragraph{paragraph A}
 \end{code}
 
-
 \subsection{Styles}
-You can use differents kind of styles.
-
+You can use differents styles for your text.
 \begin{code}[langague=tango]
-**double star bold text**
-__double underline bold text__
+  **double star bold text**
+  __double underline bold text__
 
-*single star emph text*
-\emph{emph command text}
+  *single star emph text*
+  \emph{emph command text}
 \end{code}
 
 \subsection{List}
-
 Two types of lists are available : itemize and enumerate.
 
 \begin{code}[langague=tango]
+  \begin{itemize}
+  \item the factorial function
+  \item the fibonacci function
+  \item the ackermann function
+  \end{itemize}
+
+  \begin{enumerate}
+  \item the factorial hightlights
+    \begin{enumerate}
+    \item a simple recursive scheme
+      ... etc.
+    \end{enumerate}
+  \end{enumerate}
+\end{code}
+
+
+
+We see three *classical* functions : %% *word* translates to \strong{word}  and then \textbf{word} by default
+  - the factorial function %% at least two spaces leading the '-' symbol
+  - the fibonacci function
+  - the ackermann function
+%{ this translates to
 \begin{itemize}
 \item the factorial function
 \item the fibonacci function
 \item the ackermann function
 \end{itemize}
+%}
 
+This allows to show the following features.
+  1. the factorial highlights:
+    a. a simple recursive scheme  % at least 2 chars more
+    b. a tail-call variant with a single accumulator
+    c. an imperative variant
+      i) using a while loop  % this is the final nesting, one must use the latex syntax for deeper nesting
+      ii) using a range iterator
+  2. the fibonacci highlights:
+    - a more complex recursive scheme
+    - the use of two accumulators for the tail-call version %  an embedded itemize
+%{ this translates to
 \begin{enumerate}
 \item the factorial hightlights
 \begin{enumerate}
 \item a simple recursive scheme
+
 ... etc.
+
 \end{enumerate}
 \end{enumerate}
-\end{code}
+%}
 
 
 
 
-
-\subsection{Useful commands}
+\subsection{Commands}
 
 \begin{code}[langague=tango]
 \url[Python]{http://www.python.org}
 \end{code}
+
+\subsection{Comments}
+
+% A single-line comment starts with % and extends until the end of the line
+
+%{
+A multiline comment start with %{  and ends  with the next }%.
+And multiline comments can be nested of course.
+}%
+
+ [Python|http://www.python.org]
+% a wiki-like syntax for hyperlinks is supported
+
+
+\begin{code}[language=python] % a code block, support for various programming languages is planned
+def fact(n):
+  if n = 0:
+    return 1
+  else:
+    return n * fact(n-1)
+\end{code}
+
+
+% the langage by default can be set
+\set[defaultcodelanguage=python]
+
+
+
+An tail-call version is as follows\footnote{The python interpreter does not eliminate tail calls, but the notion remains interesting anyway.}:
+
+
+% default language is python now
+\begin{code}[coderef=factit]  
+def fact(n):
+  def factit(n,acc):
+    if n = 0:
+      return acc
+   else:
+      return factit(n-1,n*acc)
+  # body of the function
+  return factit(n,1)
+\end{code}
+
+\begin{evalcode} % a block of code can be evaluated and its (by default, standard) output printed to ScriptTex
+# insertion of code blocks
+\coderef[factit]
+print("fact(4)={0}".format(fact(4))')
+\end{evalcode} % the result of an evalcode must be executable in isolation
 
 \section{Basics}
