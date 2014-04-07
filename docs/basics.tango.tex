@@ -1,5 +1,3 @@
-\section{Basics}
-
 \subsection{Basic preamble}
 Add some informations to your document.
 \begin{code}[langague=tango]
@@ -49,7 +47,24 @@ You can use differents styles for your text.
 
 \subsection{List}
 Two types of lists are available : itemize and enumerate.
+In Markdown style :
+\begin{code}[langague=tango]
+  We see three *classical* functions : 
+  - the factorial function 
+  - the fibonacci function
+  - the ackermann function
 
+  1. the factorial highlights:
+    a. a simple recursive scheme
+    b. a tail-call variant with a single accumulator
+    c. an imperative variant
+      i) using a while loop
+      ii) using a range iterator
+  2. the fibonacci highlights:
+    - a more complex recursive scheme
+    - the use of two accumulators for the tail-call version 
+\end{code}
+In Latex style :
 \begin{code}[langague=tango]
   \begin{itemize}
   \item the factorial function
@@ -66,97 +81,74 @@ Two types of lists are available : itemize and enumerate.
   \end{enumerate}
 \end{code}
 
-
-
-We see three *classical* functions : %% *word* translates to \strong{word}  and then \textbf{word} by default
-  - the factorial function %% at least two spaces leading the '-' symbol
-  - the fibonacci function
-  - the ackermann function
-%{ this translates to
-\begin{itemize}
-\item the factorial function
-\item the fibonacci function
-\item the ackermann function
-\end{itemize}
-%}
-
-This allows to show the following features.
-  1. the factorial highlights:
-    a. a simple recursive scheme  % at least 2 chars more
-    b. a tail-call variant with a single accumulator
-    c. an imperative variant
-      i) using a while loop  % this is the final nesting, one must use the latex syntax for deeper nesting
-      ii) using a range iterator
-  2. the fibonacci highlights:
-    - a more complex recursive scheme
-    - the use of two accumulators for the tail-call version %  an embedded itemize
-%{ this translates to
-\begin{enumerate}
-\item the factorial hightlights
-\begin{enumerate}
-\item a simple recursive scheme
-
-... etc.
-
-\end{enumerate}
-\end{enumerate}
-%}
-
-
-
-
-\subsection{Commands}
-
+\subsection{Comments}
+Tango has single and multi line comments.
 \begin{code}[langague=tango]
-\url[Python]{http://www.python.org}
+  % A single-line comment
+
+  %{
+  A multiline comment 
+  %{ nested comment }%
+  }%  
 \end{code}
 
-\subsection{Comments}
-
-% A single-line comment starts with % and extends until the end of the line
-
-%{
-A multiline comment start with %{  and ends  with the next }%.
-And multiline comments can be nested of course.
-}%
-
- [Python|http://www.python.org]
-% a wiki-like syntax for hyperlinks is supported
-
-
-\begin{code}[language=python] % a code block, support for various programming languages is planned
+\subsection{Block code}
+Show a code block and many languages are supported
+\begin{code}[language=python]
 def fact(n):
   if n = 0:
     return 1
   else:
     return n * fact(n-1)
 \end{code}
-
-
-% the langage by default can be set
-\set[defaultcodelanguage=python]
-
-
-
-An tail-call version is as follows\footnote{The python interpreter does not eliminate tail calls, but the notion remains interesting anyway.}:
-
-
-% default language is python now
-\begin{code}[coderef=factit]  
-def fact(n):
-  def factit(n,acc):
+A langage can be set by default
+\begin{code}[language=python]
+  \set[defaultcodelanguage=python]
+\end{code}
+You can create a reference to a block code.This reference
+let you use it as a copy/paste.
+Create a reference as below :
+\begin{code}
+  \begin{code}[coderef=factit]  
+    def fact(n):
+    def factit(n,acc):
     if n = 0:
-      return acc
-   else:
-      return factit(n-1,n*acc)
-  # body of the function
-  return factit(n,1)
+    return acc
+    else:
+    return factit(n-1,n*acc)
+    # body of the function
+    return factit(n,1)
+  \end{code}
+\end{code}
+Use your reference as below :
+\begin{evalcode}
+  \coderef[factit]
+  print("fact(4)={0}".format(fact(4))')
+\end{evalcode}
+
+\subsection{Maths}
+Math expressions are rendered by MathJax.
+Put your math expression into \$
+\begin{code}[langague=tango]
+   $n! = 1 \times \ldots \times n$
+\end{code}
+For bigger expression, follow the example below.
+\begin{code}[langague=tango]
+  \[
+   \left \{ \begin[t]{array}{l}
+              0!=1 \\
+              n! = n \times (n-1)! \text{ for } n>0
+            \end{array} \right.
+  \]
 \end{code}
 
-\begin{evalcode} % a block of code can be evaluated and its (by default, standard) output printed to ScriptTex
-# insertion of code blocks
-\coderef[factit]
-print("fact(4)={0}".format(fact(4))')
-\end{evalcode} % the result of an evalcode must be executable in isolation
-
-\section{Basics}
+\subsection{Commands}
+Syntax for hyperlinks
+\begin{code}[langague=tango]
+  \url[Python]{http://www.python.org}
+   [Python|http://www.python.org]
+\end{code}
+Syntax for footnote
+\begin{code}[langague=tango]
+  \footnote{footnote}
+\end{code}
