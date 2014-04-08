@@ -124,6 +124,8 @@ if __name__ == "__main__":
 
     # 1) parsing
 
+
+
     parser = Parser()
 
     tangoPrintln("Parsing from file '{}' ...".format(args.input_filename))
@@ -131,8 +133,6 @@ if __name__ == "__main__":
     doc = parser.parse_from_file(args.input_filename)
 
     tangoPrintln("==> parsing done.")
-
-
 
     # 2) processing
 
