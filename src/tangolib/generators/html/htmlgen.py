@@ -43,7 +43,7 @@ class HTMLOutput:
         self.pos_map = dict()
         self.last_pos = 1
 
-        self.ident_level = 4
+        self.ident_level = 12
         self.isNewLine = False
 
     def addIdentLevel(self):
@@ -263,13 +263,15 @@ class HTMLDocumentGenerator(DocumentGenerator):
     <!-- Tango: Beginning of top-level document -->
     <!-- Tango: File = '{}' -->
     <body>
+        <div class="container">
 """.format(self.document.filename))
 
         self.output.newline(None)
         self.generateHTML()
 
         self.output.append(None, \
-"""
+""" 
+        </div>
     </body>
     <!-- Tango: End of top-level document -->
 </html>

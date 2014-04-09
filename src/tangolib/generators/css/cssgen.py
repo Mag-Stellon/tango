@@ -88,7 +88,7 @@ class CSSGeneratorDocument(DocumentGenerator):
     def __init__(self, delegateHTML): 
 
 
-        self.isInsered = []  
+        self.isInsered = dict()
         self.template = CSSTemplateFactory.createBasicTemplate()
         
         self.output = CSSOutput() 
@@ -108,6 +108,10 @@ class CSSCommandGeneratorDecorator(CommandGenerator):
 
     def enter_command(self, generator, cmd):
         self.delegate.enter_command(generator, cmd)
+        if ('command' not in generator.cssGenerator.isInsered):
+            generator.cssGenerator.output.appendInCSS(generator.cssGenerator.template.getValue("command"))
+            generator.cssGenerator.isInsered['command']=True
+
 
     def exit_command(self, generator, cmd):
         self.delegate.exit_command( generator, cmd)
@@ -121,6 +125,10 @@ class CSSEnvironmentGeneratorDecorator(EnvironmentGenerator):
 
     def enter_environment(self, generator, env):
         self.delegate.enter_environment( generator, env)
+        #if ('environement' not in generator.cssGenerator.isInsered ):
+            #generator.cssGenerator.output.appendInCSS(generator.cssGenerator.template.getValue("environment"))
+            #generator.cssGenerator.isInsered['environment']=True
+
 
     def exit_environment(self, generator, env):
         self.delegate.exit_environment( generator, env)
@@ -134,14 +142,13 @@ class CSSSectionGeneratorDecorator(SectionGenerator):
 
     def enter_section(self, generator, cmd):
         self.delegate.enter_section(generator, cmd)
+        if ('section' not in generator.cssGenerator.isInsered):
+            generator.cssGenerator.output.appendInCSS(generator.cssGenerator.template.getValue("section"))
+            generator.cssGenerator.isInsered['section']=True
 
     def exit_section(self, generator, cmd):
         self.delegate.exit_section(generator, cmd)
         
-        if (generator.cssGenerator.isInsered['section'] is None):
-            self.output.appendInCSS(self.template.getValue("section"))
-            generator.cssGenerator.isInsered['section']=True
-
 
 class CSSTextGeneratorDecorator(TextGenerator):
 
