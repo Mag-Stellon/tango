@@ -204,6 +204,8 @@ if __name__ == "__main__":
             output_mode_dir = "html"
            
         output_directory = args.output_directory + "/" + output_mode_dir
+
+        output_css_directory = args.output_directory + "/css"
  
         try:
             os.makedirs(output_directory)
@@ -214,6 +216,15 @@ if __name__ == "__main__":
 
         tangoPrintln("output directory '{}'".format(output_directory))
 
+        try:
+            os.makedirs(output_css_directory)
+        except OSError:
+            tangoPrint("  => Using ")
+        else:
+            tangoPrint("  => Creating ")
+
+        tangoPrintln("output css directory '{}'".format(output_css_directory))
+
         infile_without_ext = os.path.basename(args.input_filename)
         infile_without_ext = infile_without_ext.split(".")
         if infile_without_ext[-1] == "tex":
@@ -223,15 +234,21 @@ if __name__ == "__main__":
 
     
         main_output_filename = output_directory + "/" + infile_without_ext + "-gen." + output_mode_dir
+        main_output_css_filename = output_css_directory + "/" + infile_without_ext + "-gen.css" 
+
 
         tangoPrintln("  => Writing main {} file '{}'".format(output_mode_dir, main_output_filename))
+        tangoPrintln("  => Writing main css file '{}'".format(main_output_css_filename))
 
 
         main_output_file = open(main_output_filename, 'w')
         main_output_file.write(str(generator.output))
         main_output_file.close()
 
+        main_output_file = open(main_output_css_filename, 'w')
+        main_output_file.write(str(generator.cssGenerator.output))
+        main_output_file.close()
+
         tangoPrintln("===> writing done.")
 
     print("... bye bye ...")
-

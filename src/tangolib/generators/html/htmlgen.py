@@ -3,6 +3,7 @@
 from tangolib.generator import DocumentGenerator, CommandGenerator, EnvironmentGenerator, SectionGenerator
 from tangolib.generator import TextGenerator, PreformatedGenerator, SpacesGenerator, NewlinesGenerator
 from tangolib.markup import Markup, Text, Preformated, Spaces, Newlines, SkipMarkup
+from tangolib.generators.css.cssgen import CSSGeneratorDocument,CSSCommandGeneratorDecorator,CSSEnvironmentGeneratorDecorator,CSSSectionGeneratorDecorator,CSSTextGeneratorDecorator,CSSPreformatedGeneratorDecorator,CSSSpacesGeneratorDecorator,CSSNewlinesGeneratorDecorator
 
 import json
 from os import path
@@ -123,14 +124,15 @@ class HTMLDocumentGenerator(DocumentGenerator):
 
         self.HTML_config = HTML_config
 
+        self.cssGenerator = CSSGeneratorDocument(self)
 
-        self.default_command_generator = DefaultHTMLCommandGenerator()
-        self.default_environment_generator = DefaultHTMLEnvironmentGenerator()
-        self.default_section_generator = DefaultHTMLSectionGenerator()
-        self.text_generator = HTMLTextGenerator()
-        self.preformated_generator = HTMLPreformatedGenerator()
-        self.spaces_generator = HTMLSpacesGenerator()
-        self.newlines_generator = HTMLNewlinesGenerator()
+        self.default_command_generator = CSSCommandGeneratorDecorator(DefaultHTMLCommandGenerator())
+        self.default_environment_generator = CSSEnvironmentGeneratorDecorator(DefaultHTMLEnvironmentGenerator())
+        self.default_section_generator = CSSSectionGeneratorDecorator(DefaultHTMLSectionGenerator())
+        self.text_generator = CSSTextGeneratorDecorator(HTMLTextGenerator())
+        self.preformated_generator = CSSPreformatedGeneratorDecorator(HTMLPreformatedGenerator())
+        self.spaces_generator = CSSSpacesGeneratorDecorator(HTMLSpacesGenerator())
+        self.newlines_generator = CSSNewlinesGeneratorDecorator(HTMLNewlinesGenerator())
         self.template = HTMLTemplateFactory.createBasicTemplate()
       
         
@@ -274,6 +276,13 @@ class HTMLDocumentGenerator(DocumentGenerator):
 """)
 
     def generate_preamble(self):
+
+        infile_without_ext = self.document.filename.split(".")
+        if infile_without_ext[-1] == "tex":
+            infile_without_ext = ".".join(infile_without_ext[:-1])
+        else:
+            infile_without_ext = self.document.filename
+
         return \
 """\
 <!-- Tango HTML preamble starts here -->
@@ -283,9 +292,10 @@ class HTMLDocumentGenerator(DocumentGenerator):
     <head>
         <meta charset="utf-8" />
         <title>HTML generator</title>
+        <link rel="stylesheet" href="../css/{}-gen.css">
     </head>
     <!-- Tango HTML preamble stops here -->
-"""
+""".format(infile_without_ext)
 
 
 class DefaultHTMLCommandGenerator(CommandGenerator):
