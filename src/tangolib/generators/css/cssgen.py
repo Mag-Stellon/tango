@@ -125,9 +125,9 @@ class CSSEnvironmentGeneratorDecorator(EnvironmentGenerator):
 
     def enter_environment(self, generator, env):
         self.delegate.enter_environment( generator, env)
-        #if ('environement' not in generator.cssGenerator.isInsered ):
-            #generator.cssGenerator.output.appendInCSS(generator.cssGenerator.template.getValue("environment"))
-            #generator.cssGenerator.isInsered['environment']=True
+        if ('environement' not in generator.cssGenerator.isInsered ):
+            generator.cssGenerator.output.appendInCSS(generator.cssGenerator.template.getValue("environment"))
+            generator.cssGenerator.isInsered['environment']=True
 
 
     def exit_environment(self, generator, env):
