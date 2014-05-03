@@ -23,6 +23,14 @@ class CSSTemplate:
         else:
             raise CSSTemplateError("Selector is undefined")
 
+
+    def exist(self,selector):
+        if selector in self.data:
+            return True
+        else:
+            return False
+
+
 class CSSTemplateFactory:
 
     @staticmethod
@@ -108,7 +116,7 @@ class CSSCommandGeneratorDecorator(CommandGenerator):
 
     def enter_command(self, generator, cmd):
         self.delegate.enter_command(generator, cmd)
-        if ('command' not in generator.cssGenerator.isInsered):
+        if (generator.cssGenerator.template.exist("command") and 'command' not in generator.cssGenerator.isInsered):
             generator.cssGenerator.output.appendInCSS(generator.cssGenerator.template.getValue("command"))
             generator.cssGenerator.isInsered['command']=True
 
@@ -125,7 +133,7 @@ class CSSEnvironmentGeneratorDecorator(EnvironmentGenerator):
 
     def enter_environment(self, generator, env):
         self.delegate.enter_environment( generator, env)
-        if ('environement' not in generator.cssGenerator.isInsered ):
+        if (generator.cssGenerator.template.exist("environment") and 'environement' not in generator.cssGenerator.isInsered ):
             generator.cssGenerator.output.appendInCSS(generator.cssGenerator.template.getValue("environment"))
             generator.cssGenerator.isInsered['environment']=True
 
@@ -142,7 +150,7 @@ class CSSSectionGeneratorDecorator(SectionGenerator):
 
     def enter_section(self, generator, cmd):
         self.delegate.enter_section(generator, cmd)
-        if ('section' not in generator.cssGenerator.isInsered):
+        if (generator.cssGenerator.template.exist("section") and 'section' not in generator.cssGenerator.isInsered):
             generator.cssGenerator.output.appendInCSS(generator.cssGenerator.template.getValue("section"))
             generator.cssGenerator.isInsered['section']=True
 
