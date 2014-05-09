@@ -1,54 +1,55 @@
 \subsection{Basic preamble}
 Add some informations to your document.
-\begin{code}[langague=tango]
+\code{{{
   \title{Tango user's guide}
   \author{Nadarajah Mag-Stellon}
   \date{01 Avril 2014}
-\end{code}
+}}}
 
 \subsection{Document}
 As in Latex, you can use any class system for you document's command.
 The basics document like article, report, book ... are available.
-\begin{code}[langague=tango]
+\code{{{
   \document{article}   
-\end{code}
+}}}
 
 \subsection{Environment}
 There are two kind of environment : anonymous and named environment
 Anonymous environment is use with the keyword *abstract* and let you write a nameless environment.
-\begin{code}[langague=tango]
+
+\code{{{
   \begin{EnvironementA}
   \end{EnvironmentA}
 
   \begin{abstract}
   \end{abstract}
-\end{code}
+}}}
 
 \subsection{Sections}
 Tango provides commands which let you structure your document.
-\begin{code}[langague=tango]
+\code{{{
   \section{section A} or = section A =
   \subsection{subsection A} or == subSection A ==
   \part{part A}
   \chapter{chapter A}
   \subsubsection{subsection A}
   \paragraph{paragraph A}
-\end{code}
+}}}
 
 \subsection{Styles}
 You can use differents styles for your text.
-\begin{code}[langague=tango]
+\code{{{
   **double star bold text**
   __double underline bold text__
 
   *single star emph text*
   \emph{emph command text}
-\end{code}
+}}}
 
 \subsection{List}
 Two types of lists are available : itemize and enumerate.
 In Markdown style :
-\begin{code}[langague=tango]
+\code{{{
   We see three *classical* functions : 
   - the factorial function 
   - the fibonacci function
@@ -63,9 +64,10 @@ In Markdown style :
   2. the fibonacci highlights:
     - a more complex recursive scheme
     - the use of two accumulators for the tail-call version 
-\end{code}
+}}}
+
 In Latex style :
-\begin{code}[langague=tango]
+\code{{{
   \begin{itemize}
   \item the factorial function
   \item the fibonacci function
@@ -79,36 +81,38 @@ In Latex style :
       ... etc.
     \end{enumerate}
   \end{enumerate}
-\end{code}
+}}}
 
 \subsection{Comments}
 Tango has single and multi line comments.
-\begin{code}[langague=tango]
+\code{{{
   % A single-line comment
 
   %{
   A multiline comment 
   %{ nested comment }%
   }%  
-\end{code}
+}}}
 
 \subsection{Block code}
 Show a code block and many languages are supported
-\begin{code}[language=python]
+\code{{{
 def fact(n):
   if n = 0:
     return 1
   else:
     return n * fact(n-1)
-\end{code}
+}}}
+
 A langage can be set by default
-\begin{code}[language=python]
+\code{{{
   \set[defaultcodelanguage=python]
-\end{code}
+}}}
+
 You can create a reference to a block code.This reference
 let you use it as a copy/paste.
 Create a reference as below :
-\begin{code}
+\code{{{
   \begin{code}[coderef=factit]  
     def fact(n):
     def factit(n,acc):
@@ -119,36 +123,39 @@ Create a reference as below :
     # body of the function
     return factit(n,1)
   \end{code}
-\end{code}
+}}}
 Use your reference as below :
+\code{{{
 \begin{evalcode}
   \coderef[factit]
   print("fact(4)={0}".format(fact(4))')
 \end{evalcode}
+}}}
 
 \subsection{Maths}
 Math expressions are rendered by MathJax.
 Put your math expression into \$
-\begin{code}[langague=tango]
+\code{{{
    $n! = 1 \times \ldots \times n$
-\end{code}
+}}}
+
 For bigger expression, follow the example below.
-\begin{code}[langague=tango]
+\code{{{
   \[
    \left \{ \begin[t]{array}{l}
               0!=1 \\
               n! = n \times (n-1)! \text{ for } n>0
             \end{array} \right.
   \]
-\end{code}
+}}}
 
 \subsection{Commands}
 Syntax for hyperlinks
-\begin{code}[langague=tango]
+\code{{{
   \url[Python]{http://www.python.org}
    [Python|http://www.python.org]
-\end{code}
+}}}
 Syntax for footnote
-\begin{code}[langague=tango]
+\code{{{
   \footnote{footnote}
-\end{code}
+}}}

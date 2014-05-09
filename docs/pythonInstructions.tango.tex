@@ -2,6 +2,7 @@ Tango has his own interpreter based on Python interpreter.
 Thus, you can easily run some programs into Tango.
 
 The command defPython let you define a Python function into Tango environment.
+
 \defPython[construire]{{{
 def construire(n):
     """Nat -> LISTE[Nat]
@@ -16,6 +17,7 @@ def construire(n):
 
 
 The command checkPython takes two parameters : your python function call and the expected results. This command let you check that you call get the results that expected.
+
 \checkPython{{{
 >>> construire(5)
 [1, 2, 3, 4, 5]
@@ -24,12 +26,16 @@ The command checkPython takes two parameters : your python function call and the
 }}}
 
 
+
 The command showEvelPython evaluates a Python expression.
 You can also evaluates function define by the command defPython.
+
 \answer[lines=9, points=2]{
 \showDefPython[construire]
+}
 
-Une autre solution sans utiliser \snip{range} :
+
+Another solution whithout \snip{range} :
 
 \showEvalPython{{{
 def construire(n):
@@ -43,3 +49,4 @@ def construire(n):
 construire(5)
 construire(1)
 }}}
+

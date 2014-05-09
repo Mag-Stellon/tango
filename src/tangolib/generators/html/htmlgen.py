@@ -311,11 +311,13 @@ class DefaultHTMLCommandGenerator(CommandGenerator):
 
         tag = generator.template.getValue("commands",cmd.cmd_name)
 
-
         generator.output.append(cmd.start_pos.lpos, """<{} class="command" name="{}" options="{}" open="{}">""".format(tag,cmd.cmd_name, opts_str, open_str))            
         
+
         generator.output.newline(None)
+        
         generator.output.append(cmd.start_pos.lpos, """<!-- {} -->""".format(str(cmd.content)))
+        
         generator.output.newline(None)
 
         '''
