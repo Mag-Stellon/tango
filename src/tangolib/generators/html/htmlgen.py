@@ -5,6 +5,8 @@ from tangolib.generator import TextGenerator, PreformatedGenerator, SpacesGenera
 from tangolib.markup import Markup, Text, Preformated, Spaces, Newlines, SkipMarkup
 from tangolib.generators.css.cssgen import CSSGeneratorDocument,CSSCommandGeneratorDecorator,CSSEnvironmentGeneratorDecorator,CSSSectionGeneratorDecorator,CSSTextGeneratorDecorator,CSSPreformatedGeneratorDecorator,CSSSpacesGeneratorDecorator,CSSNewlinesGeneratorDecorator
 
+from tangolib.parser import Parser
+
 import json
 from os import path
 
@@ -263,6 +265,7 @@ class HTMLDocumentGenerator(DocumentGenerator):
     <!-- Tango: Beginning of top-level document -->
     <!-- Tango: File = '{}' -->
     <body>
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
         <div class="container">
 """.format(self.document.filename))
 
@@ -312,12 +315,14 @@ class DefaultHTMLCommandGenerator(CommandGenerator):
         tag = generator.template.getValue("commands",cmd.cmd_name)
 
         generator.output.append(cmd.start_pos.lpos, """<{} class="command" name="{}" options="{}" open="{}">""".format(tag,cmd.cmd_name, opts_str, open_str))            
-        
 
         generator.output.newline(None)
         
-        generator.output.append(cmd.start_pos.lpos, """<!-- {} -->""".format(str(cmd.content)))
-        
+        if cmd.cmd_name == "code" :
+            generator.output.append(cmd.start_pos.lpos, """<pre class="prettyprint">{}</pre> """.format(str(cmd.content)))
+        else:
+            generator.output.append(cmd.start_pos.lpos, """<!-- {} -->""".format(str(cmd.content)))
+
         generator.output.newline(None)
 
         '''
@@ -437,7 +442,7 @@ class DefaultHTMLSectionGenerator(SectionGenerator):
 
 
         tag = generator.template.getValue("others","text")
-        generator.output.append(sec.start_pos.lpos,  """<{} class="sectionTitle">{}</{}>""".format(tag,sec.section_title,tag))
+        generator.output.append(sec.start_pos.lpos,  """<{} class="{}Title">{}</{}>""".format(tag,sec.section_name,sec.section_title,tag))
 
 
         #generator.output.newline(None)

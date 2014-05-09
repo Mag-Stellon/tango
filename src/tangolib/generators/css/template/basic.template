@@ -17,11 +17,19 @@
 	    }
 
 	   ],
- "section": [ { "span[class=\"sectionTitle\"]" : 
+ "section": [ { "span[class=\"partTitle\"]" : 
   	      				      	{ "border-left" : "5px solid #cccccc",
-					          "padding-left" : "5px"
+					          "padding-left" : "5px",
+						  "font-size" : "xx-large"
+						} 
+	       },
+	       { "span[class=\"sectionTitle\"]" : 
+  	      				      	{ "border-left" : "3px solid #cccccc",
+					          "padding-left" : "3px", 
+						  "font-size" : "large"
 						} 
 	       }
+
 	     ],
 
  "command" : [ { "span[class=\"command\"][name=\"emph\"]" : 
