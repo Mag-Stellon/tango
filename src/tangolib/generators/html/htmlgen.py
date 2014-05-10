@@ -265,7 +265,7 @@ class HTMLDocumentGenerator(DocumentGenerator):
     <!-- Tango: Beginning of top-level document -->
     <!-- Tango: File = '{}' -->
     <body>
-	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
         <div class="container">
 """.format(self.document.filename))
 
